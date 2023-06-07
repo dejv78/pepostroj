@@ -1,0 +1,17 @@
+:host {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  overflow: auto;
+}
+
+.detail {
+  flex: 0 0 60%;
+  background-color: var(--surface-ground);
+}
+
+.header-row {
+  background-color: rgba(63, 81, 181, 0.12);
+  color: #3F51B5;
+}

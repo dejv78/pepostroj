@@ -4,6 +4,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "pepostroj": {
+      "i18n": {
+        "sourceLocale": "cs"
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -30,7 +33,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "bundleName": "theme-mdc-light",
+                "input": "src/theme-mdc-light.scss",
+                "inject": false
+              },
+              {
+                "bundleName": "theme-mdc-dark",
+                "input": "src/theme-mdc-dark.scss",
+                "inject": false
+              }
             ],
             "scripts": []
           },
@@ -39,8 +52,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -97,8 +110,18 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2,
+            "browserTarget": "pepostroj:build:production"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

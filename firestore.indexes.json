@@ -1,0 +1,23 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "time",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "personId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "projectId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "date",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

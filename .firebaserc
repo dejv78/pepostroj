@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "pepostroj"
+  },
+  "targets": {
+    "pepostroj": {
+      "hosting": {
+        "pepostroj": [
+          "pepostroj"
+        ]
+      }
+    }
+  }
+}

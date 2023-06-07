@@ -1,0 +1,112 @@
+  <div class="flex-grow-1 p-3">
+    <p-table [value]="items()" selectionMode="single" (onRowSelect)="onItemSelect($event)" (onRowUnselect)="onItemUnselect()" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          Seznam projektů
+          <p-button icon="pi pi-plus-circle" label="Přidat projekt"></p-button>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Kód</th>
+          <th>Popis</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-project>
+        <tr [pSelectableRow]="project">
+          <td><i class="pi pi-car"></i> {{project.code }}</td>
+          <td>{{project.description }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+
+  <div class="detail p-3" *ngIf="!!selectedItem()">
+    <p-card>
+      <ng-template pTemplate="header">
+        <div class="flex flex-row align-items-center justify-content-between gap-1 pl-3 pr-3 header-row">
+          <h2>{{selectedItem()?.code}} - {{selectedItem()?.description}}</h2>
+          <div class="flex flex-row align-items-center gap-1">
+            <p-button icon="pi pi-wrench" label="Upravit projekt"></p-button>
+            <p-button icon="pi pi-trash" label="Odstranit projekt" styleClass="p-button-danger"></p-button>
+          </div>
+        </div>
+      </ng-template>
+      <p class="mb-8 mt-0">
+        <p-table [value]="workLog" [tableStyle]="{ 'min-width': '50rem' }">
+          <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+              <h3>Celková odvedená práce: XX hodin</h3>
+              <p-button icon="pi pi-clock" label="Přidat záznam práce" styleClass="p-button-secondary"></p-button>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Osoba</th>
+              <th>Datum</th>
+              <th>Počet hodin</th>
+              <th>Poznámka</th>
+              <th style="width: 5rem"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-work>
+            <tr>
+              <td><i class="pi pi-user"></i> {{work.personId}}</td>
+              <td>{{work.date | date:'mediumDate':undefined:'cs'}}</td>
+              <td>{{work.hours}}</td>
+              <td>{{work.note}}</td>
+              <td><p-button icon="pi pi-trash" styleClass="p-button-danger"></p-button></td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p>
+
+      <p class="mb-5 mt-0">
+        <p-table [value]="workLog" [tableStyle]="{ 'min-width': '50rem' }">
+          <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+              <h3>Součty dle osob</h3>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Osoba</th>
+              <th>Počet hodin</th>
+              <th>Datum</th>
+              <th>Poznámka</th>
+              <th style="width: 5rem"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-work>
+            <tr>
+              <td><i class="pi pi-user"></i> {{work.personId}}</td>
+              <td>{{work.hours}}</td>
+              <td>
+                <div class="flex flex-column">
+                  <div>{{work.date | date:'mediumDate':undefined:'cs'}}</div>
+                  <div>{{work.date | date:'mediumDate':undefined:'cs'}}</div>
+                  <div>{{work.date | date:'mediumDate':undefined:'cs'}}</div>
+                  <div>{{work.date | date:'mediumDate':undefined:'cs'}}</div>
+                  <div>{{work.date | date:'mediumDate':undefined:'cs'}}</div>
+                </div>
+              </td>
+              <td>
+                <div class="flex flex-column">
+                  <div>{{work.note}}</div>
+                  <div>{{work.note}}</div>
+                  <div>{{work.note}}</div>
+                  <div>{{work.note}}</div>
+                  <div>{{work.note}}</div>
+                </div>
+              </td>
+              <td><p-button icon="pi pi-clock" styleClass="p-button-secondary"></p-button></td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p>
+    </p-card>
+  </div>
