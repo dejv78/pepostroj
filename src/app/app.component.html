@@ -2,8 +2,8 @@
   <div class="p-toolbar-group-start">
     <h2>Pepostroj</h2>
   </div>
-  <div class="p-toolbar-group-end gap-1">
-    <p-button [icon]="(appService.currentTheme() == 'theme-mdc-light' ? 'pi pi-sun' : 'pi pi-moon')" (click)="toggleTheme()"></p-button>
+  <div class="p-toolbar-group-end gap-3">
+    <p-button [icon]="(appService.currentTheme() == 'theme-mdc-light' ? 'pi pi-sun' : 'pi pi-moon')" (click)="toggleTheme()" styleClass="p-button-rounded p-button-text"></p-button>
     <div>{{authService.userDisplayName()}}</div>
     <p-button *ngIf="!authService.isLoggedIn()" icon="pi pi-sign-in" (click)="authService.googleLogin()"></p-button>
     <p-button *ngIf="authService.isLoggedIn()" icon="pi pi-sign-out" (click)="authService.logout()"></p-button>
