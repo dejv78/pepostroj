@@ -58,6 +58,7 @@
               <td>
                 <div class="flex flex-column flex-grow-1">
                   <div *ngFor="let w of work.log" class="flex flex-row flex-grow-1 gap-3 align-content-center">
+                    <div class="text-blue-600 align-self-center w-4rem">{{w.hours}} h</div>
                     <div class="font-semibold align-self-center">{{w.date | date:'mediumDate':undefined:'cs'}}</div>
                     <div class="flex-grow-1 text-600 align-self-center">{{w.note}}</div>
                     <div class="flex flex-row align-self-center">
