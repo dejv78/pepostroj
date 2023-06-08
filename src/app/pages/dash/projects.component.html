@@ -1,5 +1,5 @@
   <div class="flex-grow-1 p-3">
-    <p-table [value]="items()" selectionMode="single" (onRowSelect)="onItemSelect($event)" (onRowUnselect)="onItemUnselect()" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="items()" selectionMode="single" (onRowSelect)="onItemSelect($event)" (onRowUnselect)="onItemUnselect()" dataKey="id">
       <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
           Seznam projektů
@@ -35,7 +35,7 @@
         </div>
       </ng-template>
       <p class="mb-5 mt-0">
-        <p-table [value]="workLog.log" [tableStyle]="{ 'min-width': '50rem' }">
+        <p-table [value]="workLog.log">
           <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
               <h3>Celková pracnost: <span class="text-blue-600">{{workLog.totalHours}} h</span></h3>
