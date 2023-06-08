@@ -1,6 +1,4 @@
-import {Component, computed, OnDestroy, Signal, signal, WritableSignal} from '@angular/core';
-import {Auth, signInWithPopup, user, User, EmailAuthProvider} from "@angular/fire/auth";
-import {Observable, Subscription} from "rxjs";
+import {Component} from '@angular/core';
 import {AuthService} from "./services/auth.service";
 
 @Component({
@@ -17,7 +15,7 @@ export class AppComponent {
       routerLink: ['/projects']
     },
     {
-      label: 'Lidé',
+      label: 'Pracovníci',
       icon: 'pi pi-user',
       routerLink: ['/people']
     },

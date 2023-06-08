@@ -1,9 +1,7 @@
 import {Component, computed, effect, signal, Signal, WritableSignal} from '@angular/core';
-import {Observable} from "rxjs";
-import {toSignal} from "@angular/core/rxjs-interop";
-import {Person} from "../../model/data";
+import {Person, PersonWorkLog} from "../../model/data";
 import {TableRowSelectEvent} from "primeng/table";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-people',
@@ -12,17 +10,25 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 })
 export class PeopleComponent {
 
-  public items: Signal<Person[]>;
+  public items: Signal<Person[]> = signal([]);
   public selectedItem: WritableSignal<Person | undefined> = signal(undefined);
   public selectedItemText: Signal<string | undefined>;
+  public workLog: PersonWorkLog = new PersonWorkLog();
 
   constructor(
-    private readonly fs: AngularFirestore
+    private readonly db: DataService
   ){
-    this.items = toSignal(this.fs.collection('people').valueChanges({ idField: 'id' })) as unknown as Signal<Person[]>;
+    this.items = db.getPeopleSignal();
 
     this.selectedItemText = computed(() => {
       return JSON.stringify(this.selectedItem(), null, 2);
+    })
+
+    effect(async () => {
+      const selectedPerson = this.selectedItem();
+      if (!!selectedPerson) {
+        this.workLog.init(await db.getWorklogForPerson(selectedPerson.id));
+      }
     })
   }
 

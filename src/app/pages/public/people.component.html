@@ -19,11 +19,61 @@
     </ng-template>
   </p-table>
 </div>
+
 <div class="detail p-3" *ngIf="!!selectedItem()">
-  <p-card header="{{selectedItem()?.name}}">
-    <p class="m-0">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-      quas!
+  <p-card>
+    <ng-template pTemplate="header">
+      <div class="flex flex-row align-items-center justify-content-between gap-1 pl-3 pr-3 header-row">
+        <h2>{{selectedItem()?.name}}</h2>
+        <div class="flex flex-row align-items-center gap-1">
+          <p-button icon="pi pi-wrench" label="Upravit pracovníka"></p-button>
+          <p-button icon="pi pi-trash" label="Odstranit pracovníka" styleClass="p-button-danger"></p-button>
+        </div>
+      </div>
+    </ng-template>
+    <p class="mb-5 mt-0">
+      <p-table [value]="workLog.log" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+            <h3>Celková práce: <span class="text-blue-600">{{workLog.totalHours}} h</span></h3>
+            <p-button icon="pi pi-clock" label="Přidat záznam práce" styleClass="p-button-secondary"></p-button>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Projekt</th>
+            <th>Počet hodin</th>
+            <th>Záznam</th>
+            <th style="width: 5rem"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-work>
+          <tr>
+            <td><i class="pi pi-car"></i> {{work.name}}</td>
+            <td class="text-blue-600 font-semibold">{{work.totalHours}} h</td>
+            <td>
+              <div class="flex flex-column flex-grow-1">
+                <div *ngFor="let w of work.log" class="flex flex-row flex-grow-1 gap-3 align-content-center">
+                  <div class="font-semibold align-self-center">{{w.date | date:'mediumDate':undefined:'cs'}}</div>
+                  <div class="flex-grow-1 text-600 align-self-center">{{w.note}}</div>
+                  <div class="flex flex-row align-self-center">
+                    <p-button icon="pi pi-wrench" styleClass="p-button-rounded p-button-text"></p-button>
+                    <p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-text p-button-danger"></p-button>
+                  </div>
+                </div>
+              </div>
+            <td>
+              <p-button icon="pi pi-clock" styleClass="p-button-secondary"></p-button>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <div class="p-3">Vypadá to, že tenhle člověk tu dělá hovno. Neplatíme ho zbytečně?</div>
+        </ng-template>
+
+      </p-table>
     </p>
   </p-card>
 </div>
