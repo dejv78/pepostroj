@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthService} from "./services/auth.service";
+import {AppService} from "./services/app.service";
 
 @Component({
   selector: 'app-root',
@@ -23,8 +24,13 @@ export class AppComponent {
 
 
   constructor(
+    public appService: AppService,
     public authService: AuthService,
   ) {
   }
 
+  public toggleTheme() {
+    const theme: string = (this.appService.currentTheme() == 'theme-mdc-light') ? 'theme-mdc-dark' : 'theme-mdc-light';
+    this.appService.switchTheme(theme);
+  }
 }
